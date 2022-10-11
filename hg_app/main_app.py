@@ -8,7 +8,7 @@ import sqlalchemy as sa
 import aggrid_option
 
 
-
+st.set_page_config(page_title="MainPage", layout="wide") 
 themetemplate = 'alpine'
 
 st.title("メインページ")
