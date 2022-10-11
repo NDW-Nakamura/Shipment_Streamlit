@@ -13,7 +13,7 @@ import datetime
 
 
 # ---Page Top
-st.set_page_config(page_title="ShipRecord check", layout="wide") 
+# ---st.set_page_config(page_title="ShipRecord check", layout="wide") 
 title = '出荷ファイル受注件数チェック'
 st.title(title)
 st.subheader('対象リスト')
