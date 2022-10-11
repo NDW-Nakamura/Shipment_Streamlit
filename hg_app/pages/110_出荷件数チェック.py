@@ -49,7 +49,7 @@ if uploaded_file:
         if len(shows2) > 0:
             st.text('旧商品一覧。')
             df = pd.read_csv('OldItem.csv'
-                        , usecols=[0, 1, 2])
+                        , usecols=[1, 2])
             st.dataframe(df)
 
     # ---Export
