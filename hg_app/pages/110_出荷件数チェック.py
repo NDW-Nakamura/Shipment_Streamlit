@@ -89,5 +89,5 @@ if st.session_state.count % 2 == 0:
     image = Image.open('hg_app/image/1.png')
     st.image(image)
 
-    image2 = Image.open('hg_app/pages/3.png')
+    image2 = Image.open('hg_app/image/3.png')
     st.image(image2)
