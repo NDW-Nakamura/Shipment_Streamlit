@@ -2,3 +2,4 @@ streamlit==1.12.2
 streamlit-aggrid==0.3.3
 pandas==1.4.4
 sqlalchemy==1.4.41
+pyxlsb==1.0.9
