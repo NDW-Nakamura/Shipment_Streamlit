@@ -86,7 +86,7 @@ if increment:
     st.session_state.count += 1 # (A)
 
 if st.session_state.count % 2 == 0:
-    image = Image.open('1.png')
+    image = Image.open('hg_app/pages/1.png')
     st.image(image)
 
     image2 = Image.open('3.png')
