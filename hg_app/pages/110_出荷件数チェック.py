@@ -86,8 +86,8 @@ if increment:
     st.session_state.count += 1 # (A)
 
 if st.session_state.count % 2 == 0:
-    image = Image.open('Shipment_Streamlit\\blob\\main\\hg_app\\image\\1.png')
+    image = Image.open('blob\\main\\hg_app\\image\\1.png')
     st.image(image)
 
-    image2 = Image.open('hg_app/image/1.png')
+    image2 = Image.open('main\\hg_app\\image\\1.png')
     st.image(image2)
