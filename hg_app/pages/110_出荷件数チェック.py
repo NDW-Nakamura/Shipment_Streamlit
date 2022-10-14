@@ -1,3 +1,4 @@
+from tkinter import PAGES
 import pandas as pd
 import streamlit as st
 import sqlalchemy as sa
@@ -18,14 +19,18 @@ title = '出荷ファイル受注件数チェック'
 st.title(title)
 st.subheader('対象リスト')
 
+if st.button('Clear'):
+    st.text('クリアしました')
 
 # ---Get Data
 # shows,sql_body = exec_sql.page_201_01()
 
-uploaded_file  = st.file_uploader('ファイルアップロード', type='txt')
+uploaded_file = st.file_uploader("Choose a CSV file", accept_multiple_files=True,key=None)
+filecount = 0
 
-if uploaded_file:
-    df = pd.read_csv(uploaded_file
+for uploaded_f in uploaded_file:
+    filecount += 1
+    df = pd.read_csv(uploaded_f
                     , encoding='cp932'
                     , header=None
                     , usecols=[0, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 14]
@@ -40,52 +45,13 @@ if uploaded_file:
                             ,"住所２": object
                             ,"住所３": object
                             ,"商品コード": object})
-                            
-    shows = df[['出荷依頼日', '受注番号', '明細数']].groupby(['出荷依頼日', '受注番号'], sort=True).sum('明細数')
+
+    st.subheader(f'{filecount}_ファイル名:{uploaded_f.name}')
+    shows = df[['出荷依頼日', '受注番号', '明細数']].groupby(['出荷依頼日', '受注番号'], sort=True).count()
     st.subheader(f'出荷データ件数：{len(shows)}件')
-    col1, col2,col3 = st.columns([8,8,12])
-    with col1:
-        st.text('受注番号で集計、右端の数字は明細行数')
-        st.dataframe(shows, 800, 300)
-    with col2:
-        st.text('旧商品が入っていると↓に表示されます。') 
-        olditemdf = pd.read_csv('OldItem.csv', usecols=[1], dtype=object)
-        targetitem = olditemdf['HG-ID'].to_list()
-        shows2 = (df[df['商品コード'].isin(targetitem)])
-        st.dataframe(shows2)
-    with col3:       
-        if len(shows2) > 0:
-            st.text('旧商品一覧。')
-            df = pd.read_csv('OldItem.csv'
-                        , usecols=[1, 2])
-            st.dataframe(df)
 
-    # ---Export
-    now = datetime.datetime.now()
-    dt_now = now.strftime('%Y%m%d_%H%M%S')
-    col1, col2 = st.columns([4,30])
-    with col1:
-        csv = export.create_csv(shows)
 
-        st.download_button(
-        label="Download CSV",
-        data=csv,
-        file_name=f'{dt_now}_{title}.csv',
-        mime='text/csv',
-    )
-
-    with col2:
-        df_xlsx = export.to_excel(shows)
-        
-        st.download_button(
-        label='Download EXCEL',
-        data=df_xlsx ,
-        file_name= f'{dt_now}_{title}.xlsx'
-    )
-
-        
-    st.subheader('タブチェック')
-    tabcheck = df.fillna('空')
+    tabcheck = df.fillna('')
 
     order = (tabcheck[tabcheck['受注番号'].str.contains('\t')])
     if len(order) > 0:
@@ -131,6 +97,26 @@ if uploaded_file:
     if len(add3) > 0:
         st.text(f'住所３にタブが含まれています')
         st.dataframe(add3)
+    
+
+    col1, col2, col3 = st.columns([8,8,12])
+    with col1:
+        st.text('受注番号で集計、右端の数字は明細行数')
+        st.dataframe(shows, 800, 300)
+    with col2:
+        st.text('旧商品が入っていると↓に表示されます。') 
+        olditemdf = pd.read_csv('OldItem.csv', usecols=[1], dtype=object)
+        targetitem = olditemdf['HG-ID'].to_list()
+        shows2 = (df[df['商品コード'].isin(targetitem)])
+        st.dataframe(shows2.loc[:, ['受注番号', '会員氏名','商品コード']])
+    with col3:
+        if len(shows2) > 0:
+            st.text('旧商品一覧。')
+            olditem = pd.read_csv('OldItem.csv'
+                        , usecols=[1, 2])
+            st.dataframe(olditem)
+
+    st.markdown("---") #区切り線
 
 
 
