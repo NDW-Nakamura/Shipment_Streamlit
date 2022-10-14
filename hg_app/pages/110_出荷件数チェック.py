@@ -38,7 +38,8 @@ if uploaded_file:
                             ,"市区町村": object
                             ,"住所１": object
                             ,"住所２": object
-                            ,"住所３": object})
+                            ,"住所３": object
+                            ,"商品コード": object})
                             
     shows = df[['出荷依頼日', '受注番号', '明細数']].groupby(['出荷依頼日', '受注番号'], sort=True).sum('明細数')
     st.subheader(f'出荷データ件数：{len(shows)}件')
