@@ -28,10 +28,17 @@ if uploaded_file:
     df = pd.read_csv(uploaded_file
                     , encoding='cp932'
                     , header=None
-                    , usecols=[0, 11, 12, 14]
-                    , names=('受注番号', '出荷依頼日', '商品コード', '明細数')
+                    , usecols=[0, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 14]
+                    , names=('受注番号', '会員氏名', '送付先名', '郵便番号', '都道府県', '市区町村', '住所１', '住所２', '住所３', '出荷依頼日', '商品コード', '明細数')
                     , dtype={"受注番号": object
-                            ,"商品コード":object})
+                            ,"会員氏名": object
+                            ,"送付先名": object
+                            ,"郵便番号": object
+                            ,"都道府県": object
+                            ,"市区町村": object
+                            ,"住所１": object
+                            ,"住所２": object
+                            ,"住所３": object})
                             
     shows = df[['出荷依頼日', '受注番号', '明細数']].groupby(['出荷依頼日', '受注番号'], sort=True).sum('明細数')
     st.subheader(f'出荷データ件数：{len(shows)}件')
