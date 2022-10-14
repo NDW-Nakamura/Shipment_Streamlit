@@ -1,4 +1,3 @@
-from tkinter import PAGES
 import pandas as pd
 import streamlit as st
 import sqlalchemy as sa
@@ -18,9 +17,6 @@ import datetime
 title = '出荷ファイル受注件数チェック'
 st.title(title)
 st.subheader('対象リスト')
-
-if st.button('Clear'):
-    st.text('クリアしました')
 
 # ---Get Data
 # shows,sql_body = exec_sql.page_201_01()
