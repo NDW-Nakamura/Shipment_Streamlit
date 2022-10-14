@@ -75,6 +75,54 @@ if uploaded_file:
         file_name= f'{dt_now}_{title}.xlsx'
     )
 
+        
+    st.subheader('タブチェック')
+    tabcheck = df.fillna('空')
+
+    order = (tabcheck[tabcheck['受注番号'].str.contains('\t')])
+    if len(order) > 0:
+        st.text(f'受注番号にタブが含まれています')
+        st.dataframe(order)
+    
+    name = (tabcheck[tabcheck['会員氏名'].str.contains('\t')])
+    if len(name) > 0:
+        st.text(f'会員氏名にタブが含まれています')
+        st.dataframe(name)
+
+    sendname = (tabcheck[tabcheck['送付先名'].str.contains('\t')])
+    if len(sendname) > 0:
+        st.text(f'送付先名にタブが含まれています')
+        st.dataframe(sendname)
+
+    post = (tabcheck[tabcheck['郵便番号'].str.contains('\t')])
+    if len(post) > 0:
+        st.text(f'郵便番号にタブが含まれています')
+        st.dataframe(post)
+
+    pref = (tabcheck[tabcheck['都道府県'].str.contains('\t')])
+    if len(pref) > 0:
+        st.text(f'都道府県にタブが含まれています')
+        st.dataframe(pref)
+
+    city = (tabcheck[tabcheck['市区町村'].str.contains('\t')])
+    if len(city) > 0:
+        st.text(f'市区町村にタブが含まれています')
+        st.dataframe(city)
+
+    add1 = (tabcheck[tabcheck['住所１'].str.contains('\t')])
+    if len(add1) > 0:
+        st.text(f'住所１にタブが含まれています')
+        st.dataframe(add1)
+
+    add2 = (tabcheck[tabcheck['住所２'].str.contains('\t')])
+    if len(add2) > 0:
+        st.text(f'住所２にタブが含まれています')
+        st.dataframe(add2)
+    
+    add3 = (tabcheck[tabcheck['住所３'].str.contains('\t')])
+    if len(add3) > 0:
+        st.text(f'住所３にタブが含まれています')
+        st.dataframe(add3)
 
 
 
