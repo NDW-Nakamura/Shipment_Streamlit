@@ -42,56 +42,64 @@ for uploaded_f in uploaded_file:
                             ,"住所３": object
                             ,"商品コード": object})
 
-    st.subheader(f'{filecount}_ファイル名:{uploaded_f.name}')
+    s = uploaded_f.name
+    s_first, s_second, s_last = s[:4], s[4:11], s[11:]
+    print(f'{s_first}と{s_second}と{s_last}')
+
+    fn = f'{s_first}<span style="font-weight: bold; font-size: 48px; color:coral">{s_second}</span>{s_last}'
+
+    st.write(f'{filecount}_ファイル名:{fn}', unsafe_allow_html=True)
     shows = df[['出荷依頼日', '受注番号', '明細数']].groupby(['出荷依頼日', '受注番号'], sort=True).count()
-    st.subheader(f'出荷データ件数：{len(shows)}件')
+    
+    reccount = f'出荷データ件数：<span style="font-weight: bold; font-size: 48px; color:Teal">{len(shows)}</span>件'
+    st.write(reccount, unsafe_allow_html=True)
 
 
     tabcheck = df.fillna('')
 
     order = (tabcheck[tabcheck['受注番号'].str.contains('\t')])
     if len(order) > 0:
-        st.text(f'受注番号にタブが含まれています')
+        st.write(f'<span style="color:red">受注番号にタブが含まれています</span>', unsafe_allow_html=True)
         st.dataframe(order)
     
     name = (tabcheck[tabcheck['会員氏名'].str.contains('\t')])
     if len(name) > 0:
-        st.text(f'会員氏名にタブが含まれています')
+        st.write(f'<span style="color:red">会員氏名にタブが含まれています</span>', unsafe_allow_html=True)
         st.dataframe(name)
 
     sendname = (tabcheck[tabcheck['送付先名'].str.contains('\t')])
     if len(sendname) > 0:
-        st.text(f'送付先名にタブが含まれています')
+        st.write(f'<span style="color:red">送付先名にタブが含まれています</span>', unsafe_allow_html=True)
         st.dataframe(sendname)
 
     post = (tabcheck[tabcheck['郵便番号'].str.contains('\t')])
     if len(post) > 0:
-        st.text(f'郵便番号にタブが含まれています')
+        st.write(f'<span style="color:red">郵便番号にタブが含まれています</span>', unsafe_allow_html=True)
         st.dataframe(post)
 
     pref = (tabcheck[tabcheck['都道府県'].str.contains('\t')])
     if len(pref) > 0:
-        st.text(f'都道府県にタブが含まれています')
+        st.write(f'<span style="color:red">都道府県にタブが含まれています</span>', unsafe_allow_html=True)
         st.dataframe(pref)
 
     city = (tabcheck[tabcheck['市区町村'].str.contains('\t')])
     if len(city) > 0:
-        st.text(f'市区町村にタブが含まれています')
+        st.write(f'<span style="color:red">市区町村にタブが含まれています</span>', unsafe_allow_html=True)
         st.dataframe(city)
 
     add1 = (tabcheck[tabcheck['住所１'].str.contains('\t')])
     if len(add1) > 0:
-        st.text(f'住所１にタブが含まれています')
+        st.write(f'<span style="color:red">住所１にタブが含まれています</span>', unsafe_allow_html=True)
         st.dataframe(add1)
 
     add2 = (tabcheck[tabcheck['住所２'].str.contains('\t')])
     if len(add2) > 0:
-        st.text(f'住所２にタブが含まれています')
+        st.write(f'<span style="color:red">住所２にタブが含まれています</span>', unsafe_allow_html=True)
         st.dataframe(add2)
     
     add3 = (tabcheck[tabcheck['住所３'].str.contains('\t')])
     if len(add3) > 0:
-        st.text(f'住所３にタブが含まれています')
+        st.write(f'<span style="color:red">住所３にタブが含まれています</span>', unsafe_allow_html=True)
         st.dataframe(add3)
     
 
