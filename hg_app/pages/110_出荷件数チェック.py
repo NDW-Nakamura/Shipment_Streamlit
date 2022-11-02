@@ -23,6 +23,7 @@ st.subheader('対象リスト')
 
 uploaded_file = st.file_uploader("Choose a CSV file", accept_multiple_files=True,key=None)
 filecount = 0
+filedisc_res = ''
 
 for uploaded_f in uploaded_file:
     filecount += 1
@@ -41,18 +42,22 @@ for uploaded_f in uploaded_file:
                             ,"住所２": object
                             ,"住所３": object
                             ,"商品コード": object})
-
-    s = uploaded_f.name
-    s_first, s_second, s_last = s[:4], s[4:11], s[11:]
-    print(f'{s_first}と{s_second}と{s_last}')
-
-    fn = f'{s_first}<span style="font-weight: bold; font-size: 48px; color:coral">{s_second}</span>{s_last}'
-
-    st.write(f'{filecount}_ファイル名:{fn}', unsafe_allow_html=True)
-    shows = df[['出荷依頼日', '受注番号', '明細数']].groupby(['出荷依頼日', '受注番号'], sort=True).count()
     
-    reccount = f'出荷データ件数：<span style="font-weight: bold; font-size: 48px; color:Teal">{len(shows)}</span>件'
+    s = uploaded_f.name
+    s_year, s_month, s_day, s_index, s_mcategory, s_memtext, s_extension = s[:4], s[4:6], s[6:8], s[8:10], s[10:11], s[11:13], s[13:]
+
+    fn = f'<span style="font-size: 24px">{filecount}_ファイル名:</span>\
+            {s_year}<span style="font-weight: bold; font-size: 48px; color:coral">{s_month}{s_day}{s_mcategory}</span>{s_memtext}{s_extension}'
+    st.write(f'{fn}', unsafe_allow_html=True)
+
+
+    shows = df[['出荷依頼日', '受注番号', '明細数']].groupby(['出荷依頼日', '受注番号'], sort=True).count()
+    count = len(shows)
+    
+    reccount = f'<span style="font-size: 24px">出荷データ件数：</span>\
+            <span style="font-weight: bold; font-size: 48px; color:Teal">{count}</span>件'
     st.write(reccount, unsafe_allow_html=True)
+
 
 
     tabcheck = df.fillna('')
@@ -122,7 +127,22 @@ for uploaded_f in uploaded_file:
 
     st.markdown("---") #区切り線
 
+    youbi_list = {1:"月", 2:"火", 3:"水", 4:"木", 5:"金", 6:"土", 7:"日"}
+    date = datetime.date(int(s_year),int(s_month),int(s_day))
+    youbi = date.isoweekday()
+    youbi_txt = youbi_list[youbi]
 
+    filedisc = (f'{s_month}月{s_day}日（{youbi_txt}）出荷データ\n「{s_year}{s_month}{s_day}{s_mcategory}{s_memtext}」－{s_mcategory}会員様向け－（{count}件)\n')
+
+    if s_mcategory == "B":
+        filedisc = (f'{filedisc}                           ※契約書面押印日『{s_month}月{s_day}日』\n')
+    
+    filedisc_res = filedisc_res + filedisc
+
+    
+st.code(filedisc_res)
+
+st.markdown("---") #区切り線
 
 if "count" not in st.session_state: # (C)
         st.session_state.count = 1 # (A)
