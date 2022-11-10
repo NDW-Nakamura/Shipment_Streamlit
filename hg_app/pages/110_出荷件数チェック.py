@@ -47,7 +47,7 @@ for uploaded_f in uploaded_file:
     s_year, s_month, s_day, s_index, s_mcategory, s_memtext, s_extension = s[:4], s[4:6], s[6:8], s[8:10], s[10:11], s[11:13], s[13:]
 
     fn = f'<span style="font-size: 24px">{filecount}_ファイル名:</span>\
-            {s_year}<span style="font-weight: bold; font-size: 48px; color:coral">{s_month}{s_day}{s_mcategory}</span>{s_memtext}{s_extension}'
+            {s_year}<span style="font-weight: bold; font-size: 48px; color:coral">{s_month}{s_day}{s_index}{s_mcategory}</span>{s_memtext}{s_extension}'
     st.write(f'{fn}', unsafe_allow_html=True)
 
 
