@@ -112,6 +112,10 @@ for uploaded_f in uploaded_file:
     with col1:
         st.text('受注番号で集計、右端の数字は明細行数')
         st.dataframe(shows, 800, 300)
+        if shows['明細数'].isin([0]).any():
+            print(shows['明細数'])
+            errmess = f'<span style="font-weight: bold; font-size: 24px; color:coral">明細行数が0の受注が存在します。</span>'
+            st.write(f'{errmess}', unsafe_allow_html=True)
     with col2:
         st.text('旧商品が入っていると↓に表示されます。') 
         olditemdf = pd.read_csv('OldItem.csv', usecols=[1], dtype=object)
