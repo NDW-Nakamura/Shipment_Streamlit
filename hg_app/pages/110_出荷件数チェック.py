@@ -114,7 +114,7 @@ for uploaded_f in uploaded_file:
         st.dataframe(shows, 800, 300)
         if shows['明細数'].isin([0]).any():
             print(shows['明細数'])
-            errmess = f'<span style="font-weight: bold; font-size: 24px; color:coral">明細行数が0の受注が存在します。</span>'
+            errmess = f'<span style="font-weight: bold; font-size: 24px; color:coral">購入商品が無い受注が存在します。</span>'
             st.write(f'{errmess}', unsafe_allow_html=True)
     with col2:
         st.text('旧商品が入っていると↓に表示されます。') 
