@@ -6,7 +6,6 @@ from bs4 import BeautifulSoup
 import os
 import sqlalchemy as sa
 import aggrid_option
-import csvimport
 import requests
 
 st.set_page_config(page_title="MainPage", layout="wide") 
