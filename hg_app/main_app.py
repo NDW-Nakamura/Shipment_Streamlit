@@ -30,7 +30,7 @@ with col1:
 
 
 with col2:
-    st.subheader("【公式発表】ヤマト重要ニュース")   
+    st.subheader("【ヤマト運輸公式発表】最新重要ニュース")   
     r = requests.get("https://www.yamato-hd.co.jp/important/")
     soup = BeautifulSoup(r.content, "html.parser")
     
