@@ -13,23 +13,9 @@ themetemplate = 'alpine'
 
 st.title("メインページ")
 
-col1, col2 = st.columns([12,20])
+col1, col2 = st.columns([20,12])
+
 with col1:
-    st.subheader('【出荷件数チェック】')
-    st.text(f'日々の出荷データ件数を集計出来ます。\n旧商品が含まれている場合、含まれている旧商品情報を表示させます。')
-
-    st.subheader('【商品別個数集計】')
-    st.text(f'日々の出荷データ内の商品別個数を集計出来ます。')
-
-    st.subheader('【旧商品登録】')
-    uploaded_file  = st.file_uploader('旧商品ファイルアップロード', type='csv')
-    if uploaded_file:
-        
-        df = pd.read_csv(uploaded_file)
-        df.to_csv('OldItem.csv')
-
-
-with col2:
     st.subheader("【ヤマト運輸公式発表】最新重要ニュース")   
     r = requests.get("https://www.yamato-hd.co.jp/important/")
     soup = BeautifulSoup(r.content, "html.parser")
@@ -52,3 +38,18 @@ with col2:
     
     found = (str(found).replace('href="/', 'href="https://www.yamato-hd.co.jp/'))
     st.write(f'{found}{style}', unsafe_allow_html=True)
+    
+    
+with col2:
+    st.subheader('【出荷件数チェック】')
+    st.text(f'日々の出荷データ件数を集計出来ます。\n旧商品が含まれている場合、含まれている旧商品情報を表示させます。')
+
+    st.subheader('【商品別個数集計】')
+    st.text(f'日々の出荷データ内の商品別個数を集計出来ます。')
+
+    st.subheader('【旧商品登録】')
+    uploaded_file  = st.file_uploader('旧商品ファイルアップロード', type='csv')
+    if uploaded_file:
+        
+        df = pd.read_csv(uploaded_file)
+        df.to_csv('OldItem.csv')
