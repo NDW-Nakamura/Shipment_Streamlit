@@ -52,4 +52,4 @@ with col2:
     if uploaded_file:
         
         df = pd.read_csv(uploaded_file)
-        df.to_csv('OldItem.csv')
+        # df.to_csv('OldItem.csv')
