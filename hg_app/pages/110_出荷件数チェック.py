@@ -126,9 +126,9 @@ for uploaded_f in uploaded_file:
     with col3:
         if len(shows2) > 0:
             st.text('旧商品一覧。')
-             olditem = pd.read_csv('OldItem.csv'
+            olditem = pd.read_csv('OldItem.csv'
                          , usecols=[1, 2])
-             st.dataframe(olditem)
+            st.dataframe(olditem)
 
     st.markdown("---") #区切り線
 
