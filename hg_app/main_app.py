@@ -51,5 +51,5 @@ with col2:
     # uploaded_file  = st.file_uploader('旧商品ファイルアップロード', type='csv')
     if uploaded_file:
         
-         # df = pd.read_csv(uploaded_file)
-         # df.to_csv('OldItem.csv')
+         df = pd.read_csv(uploaded_file)
+         df.to_csv('OldItem.csv')
