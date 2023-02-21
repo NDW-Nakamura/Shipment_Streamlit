@@ -121,14 +121,14 @@ for uploaded_f in uploaded_file:
         # olditemdf = pd.read_csv('OldItem.csv', usecols=[1], dtype=object)
         # targetitem = olditemdf['HG-ID'].to_list()
         # shows2 = (df[df['商品コード'].isin(targetitem)])
-        shows2 = (df[df['商品コード'].isin(['103','105','109','111','112','113','114','115','116','117','118','119','123','124','125','126','127','128','131','148','152','153','154','155','201','217','218','220','230','231','243','247','258'])])
-        st.dataframe(shows2.loc[:, ['受注番号', '会員氏名','商品コード']])
+        # shows2 = (df[df['商品コード'].isin(['103','105','109','111','112','113','114','115','116','117','118','119','123','124','125','126','127','128','131','148','152','153','154','155','201','217','218','220','230','231','243','247','258'])])
+        # st.dataframe(shows2.loc[:, ['受注番号', '会員氏名','商品コード']])
     with col3:
         if len(shows2) > 0:
             st.text('旧商品一覧。')
-            olditem = pd.read_csv('OldItem.csv'
-                         , usecols=[1, 2])
-            st.dataframe(olditem)
+            # olditem = pd.read_csv('OldItem.csv'
+            #              , usecols=[1, 2])
+            # st.dataframe(olditem)
 
     st.markdown("---") #区切り線
 
