@@ -48,8 +48,8 @@ with col2:
     st.text(f'日々の出荷データ内の商品別個数を集計出来ます。')
 
     st.subheader('【旧商品登録】')
-    uploaded_file  = st.file_uploader('旧商品ファイルアップロード', type='csv')
+    # uploaded_file  = st.file_uploader('旧商品ファイルアップロード', type='csv')
     if uploaded_file:
         
-         df = pd.read_csv(uploaded_file)
-         df.to_csv('OldItem.csv')
+         # df = pd.read_csv(uploaded_file)
+         # df.to_csv('OldItem.csv')
