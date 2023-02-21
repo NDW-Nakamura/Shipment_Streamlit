@@ -17,27 +17,27 @@ col1, col2 = st.columns([20,12])
 
 with col1:
     st.subheader("【ヤマト運輸公式発表】最新重要ニュース")   
-    # r = requests.get("https://www.yamato-hd.co.jp/important/")
-    # soup = BeautifulSoup(r.content, "html.parser")
+    r = requests.get("https://www.yamato-hd.co.jp/important/")
+    soup = BeautifulSoup(r.content, "html.parser")
     
     #必要な情報のクラスを指定して抽出
-    # found = soup.find('div', class_='Main__content')
+    found = soup.find('div', class_='Main__content')
 
-    # style = '''
-    #             <style>
-    #                 time.news__date{
-    #                     font-size: 24px;
-    #                 }
-    # 
-    #                 h3.news__title{
-    #                     font-size: 18px;
-    #                 }
-    #             </style>)'''
-
-    # print(f'{found}{style}')
+    style = '''
+                <style>
+                    time.news__date{
+                        font-size: 24px;
+                    }
     
-    # found = (str(found).replace('href="/', 'href="https://www.yamato-hd.co.jp/'))
-    # st.write(f'{found}{style}', unsafe_allow_html=True)
+                    h3.news__title{
+                        font-size: 18px;
+                    }
+                </style>)'''
+
+    print(f'{found}{style}')
+    
+    found = (str(found).replace('href="/', 'href="https://www.yamato-hd.co.jp/'))
+    st.write(f'{found}{style}', unsafe_allow_html=True)
     
     
 with col2:
