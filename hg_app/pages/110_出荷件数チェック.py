@@ -137,7 +137,7 @@ for uploaded_f in uploaded_file:
     youbi = date.isoweekday()
     youbi_txt = youbi_list[youbi]
 
-    filedisc = (f'{s_month}月{s_day}日（{youbi_txt}）出荷データ\n「{s_year}{s_month}{s_day}{s_mcategory}{s_memtext}」－{s_mcategory}会員様向け－（{count}件)\n')
+    filedisc = (f'{s_month}月{s_day}日（{youbi_txt}）出荷データ\n「{s_year}{s_month}{s_day}{s_index}{s_mcategory}{s_memtext}」－{s_mcategory}会員様向け－（{count}件)\n')
 
     if s_mcategory == "B":
         filedisc = (f'{filedisc}                           ※契約書面押印日『{s_month}月{s_day}日』\n')
