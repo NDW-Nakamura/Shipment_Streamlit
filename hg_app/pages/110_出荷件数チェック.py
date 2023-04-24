@@ -125,6 +125,7 @@ for uploaded_f in uploaded_file:
         st.dataframe(shows2.loc[:, ['受注番号', '会員氏名','商品コード']])
     with col3:
         if len(shows2) > 0:
+            st.write(f'<span style="color:red;FONT-SIZE:7mm">旧商品にご注意ください！！！</span>', unsafe_allow_html=True)
             st.text('旧商品一覧。')
             olditem = pd.read_csv('OldItem.csv'
                          , usecols=[1, 2])
